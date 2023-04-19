@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/image_editor/static/js/main.b8404910.js",
+    "static/js/787.8361a328.chunk.js": "/image_editor/static/js/787.8361a328.chunk.js",
+    "static/media/image.jpg": "/image_editor/static/media/image.a75d575cbe6dcf1d9a29.jpg",
+    "index.html": "/image_editor/index.html",
+    "main.b8404910.js.map": "/image_editor/static/js/main.b8404910.js.map",
+    "787.8361a328.chunk.js.map": "/image_editor/static/js/787.8361a328.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.b8404910.js"
+  ]
+}
