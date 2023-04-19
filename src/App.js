@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import image from './image.jpg';
+import { Fragment, useState } from 'react';
+import AddTag from './AddTag';
+import ShowTags from './ShowTags';
 
 function App() {
+  const [open, setOpen] = useState(false);
+
+  const [display, setDisplay] = useState("none")
+
+  const [x, setX] = useState();
+
+  const [y, setY] = useState();
+
+  const addTag = (e) => {
+    setX(e.clientX);
+    setY(e.clientY);
+    setOpen(true);    
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <img src={image} onMouseEnter={()=>setDisplay("block")} onMouseLeave={()=>setDisplay("none")} onClick={(e)=>addTag(e)} style={{display:"block", margin:"auto", maxHeight:"100%", maxWidth:"100%"}} alt="core_image" />
+      <AddTag open={open} setOpen={setOpen} x={x} y={y} />
+      <ShowTags display={display} />
+    </Fragment>
   );
 }
 
