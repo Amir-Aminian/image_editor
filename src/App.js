@@ -25,6 +25,6 @@ function App() {
       <ShowTags display={display} />
     </Fragment>
   );
-}
+};
 
 export default App;
