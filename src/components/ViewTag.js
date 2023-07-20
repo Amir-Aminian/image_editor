@@ -3,6 +3,8 @@ import { Fab, Badge, Chip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import getTagData from "../utilities/getTagData";
+import deleteTag from "../utilities/deleteTag";
+import addTagData from "../utilities/addTagData";
 
 const ViewTag = ({open, setOpen, tagId}) => {
   const tagData = getTagData(tagId);
@@ -19,13 +21,14 @@ const ViewTag = ({open, setOpen, tagId}) => {
   }, [tagId]);
 
   const edit = (data) => {
-    
+    deleteTag(tagId);
+    addTagData(tagData.x, tagData.y, color, colorLabel, data);
     reset();
     setOpen(false);
   };
 
   return(
-    <Modal open={open} onClose={() => {setOpen(false); reset();}}>
+    <Modal open={open} onClose={() => {setOpen(false); reset(); setColor(tagData.color); setColorLabel(tagData.colorLabel);}}>
       <ModalDialog>
         <ModalClose />
         <Stack spacing={2}>
@@ -49,8 +52,8 @@ const ViewTag = ({open, setOpen, tagId}) => {
                 <Fab onClick={() => {setColor("rgb(15, 157, 88)"); setColorLabel("Green")}} size="small" sx={{backgroundColor:"rgb(15, 157, 88)", ":hover":{backgroundColor:"rgb(15, 157, 88)"}}} />
               </Stack>
               <Stack direction="row" spacing={8} justifyContent="center">
-                <Button type="submit">Edit</Button>
-                <Button onClick={() => {setOpen(false); reset();}}>Close</Button>
+                <Button type="submit" sx={{width: 80}}>Edit</Button>
+                <Button onClick={() => {setOpen(false); reset(); setColor(tagData.color); setColorLabel(tagData.colorLabel);}} sx={{width: 80}}>Close</Button>
               </Stack>              
             </Stack>
           </form>
