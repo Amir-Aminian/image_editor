@@ -1,7 +1,7 @@
 import image from './image.jpg';
 import { Fragment, useState } from 'react';
-import AddTag from './AddTag';
-import ShowTags from './ShowTags';
+import AddTag from './components/AddTag';
+import Tags from './components/Tags';
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ function App() {
     <Fragment>
       <img src={image} onMouseEnter={()=>setDisplay("block")} onMouseLeave={()=>setDisplay("none")} onClick={(e)=>addTag(e)} style={{display:"block", margin:"auto", maxHeight:"100%", maxWidth:"100%"}} alt="core_image" />
       <AddTag open={open} setOpen={setOpen} x={x} y={y} />
-      <ShowTags display={display} />
+      <Tags display={display} setDisplay={setDisplay} />
     </Fragment>
   );
 };

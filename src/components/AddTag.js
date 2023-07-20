@@ -5,7 +5,7 @@ const AddTag = ({open, setOpen, x, y}) => {
   const {handleSubmit, register} = useForm()
   const add = (data) => {
     let tags = JSON.parse(localStorage.getItem("tags")) || [];
-    tags.push({x: x, y: y, ...data})
+    tags.push({x: x, y: y, id: `${x}`.concat(`${y}`), ...data})
     localStorage.setItem("tags", JSON.stringify(tags));
     setOpen(false);
   };
