@@ -3,11 +3,11 @@ const deleteTag = (id) => {
 
   const findTag = (tag) => {
     return (tag.id !== id);        
-};
+  };
 
-tags = tags.filter(findTag);
+  tags = tags.filter(findTag);
 
-localStorage.setItem("tags", JSON.stringify(tags));
+  localStorage.setItem("tags", JSON.stringify(tags));
 };
 
 export default deleteTag;

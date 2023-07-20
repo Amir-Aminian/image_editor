@@ -1,34 +1,41 @@
 import { Button, FormLabel, Input, Modal, ModalClose, ModalDialog, Stack, Typography } from "@mui/joy";
 import { Fab, Badge, Chip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import addTagData from "../utilities/addTagData";
+import getTagData from "../utilities/getTagData";
 
-const AddTag = ({open, setOpen, x, y}) => {
-  const[color, setColor] = useState("rgb(66, 133, 244)");
+const ViewTag = ({open, setOpen, tagId}) => {
+  const tagData = getTagData(tagId);
 
-  const[colorLabel, setColorLabel] = useState("Blue");
+  const[color, setColor] = useState();
+
+  const[colorLabel, setColorLabel] = useState();
 
   const {handleSubmit, register, reset} = useForm();
 
-  const add = (data) => {
-    addTagData(x, y, color, colorLabel, data);
-    setOpen(false);
+  useEffect(() => {
+    setColor(tagData.color);
+    setColorLabel(tagData.colorLabel);
+  }, [tagId]);
+
+  const edit = (data) => {
+    
     reset();
+    setOpen(false);
   };
 
   return(
-    <Modal open={open} onClose={() => setOpen(false)}>
+    <Modal open={open} onClose={() => {setOpen(false); reset();}}>
       <ModalDialog>
         <ModalClose />
         <Stack spacing={2}>
-          <Typography component="h2">Add a tag</Typography>
-          <form onSubmit={handleSubmit(add)}>
+          <Typography component="h2">View or edit this tag</Typography>
+          <form onSubmit={handleSubmit(edit)}>
             <Stack spacing={2}>
               <FormLabel>Title:</FormLabel>
-              <Input autoFocus required {...register("title")} />
+              <Input defaultValue={tagData.title} autoFocus required {...register("title")} />
               <FormLabel>Description:</FormLabel>
-              <Input required {...register("description")} />
+              <Input defaultValue={tagData.description} required {...register("description")} />
               <Stack direction="row" spacing={2}>
                 <FormLabel>Pick a color for your tag:</FormLabel>
                 <Badge badgeContent="" sx={{"& .MuiBadge-badge":{backgroundColor:color}}}>
@@ -41,7 +48,10 @@ const AddTag = ({open, setOpen, x, y}) => {
                 <Fab onClick={() => {setColor("rgb(244, 180, 0)"); setColorLabel("Yellow")}} size="small" sx={{backgroundColor:"rgb(244, 180, 0)", ":hover":{backgroundColor:"rgb(244, 180, 0)"}}} />
                 <Fab onClick={() => {setColor("rgb(15, 157, 88)"); setColorLabel("Green")}} size="small" sx={{backgroundColor:"rgb(15, 157, 88)", ":hover":{backgroundColor:"rgb(15, 157, 88)"}}} />
               </Stack>
-              <Button type="submit">Add</Button>
+              <Stack direction="row" spacing={8} justifyContent="center">
+                <Button type="submit">Edit</Button>
+                <Button onClick={() => {setOpen(false); reset();}}>Close</Button>
+              </Stack>              
             </Stack>
           </form>
         </Stack>
@@ -50,4 +60,4 @@ const AddTag = ({open, setOpen, x, y}) => {
   );
 };
 
-export default AddTag;
+export default ViewTag;
