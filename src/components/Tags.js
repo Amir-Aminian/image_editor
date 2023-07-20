@@ -18,7 +18,7 @@ const visibility = (id) => {
   return(
     tags.map((tag) => (
       <Badge key={tag.id} onMouseEnter={() => {setDisplay("block"); setChip(tag.id)}}  onMouseLeave={()=>setChip(null)} sx={{position:"absolute", left:tag.x+"px", top:tag.y+"px", display: display}} anchorOrigin={{vertical: 'top', horizontal: 'left'}} color="danger">
-        <Chip variant="soft" color="danger" endDecorator={<ChipDelete onDelete={() => {deleteTag(tag.id); setChip(null);}} />} sx={{display: visibility(tag.id)}}>{tag.title}</Chip>
+        <Chip variant="soft" color="neutral" endDecorator={<ChipDelete onDelete={() => {deleteTag(tag.id); setChip(null);}} />} sx={{display: visibility(tag.id)}}>{tag.title}</Chip>
       </Badge>
     ))
   );
