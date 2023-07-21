@@ -15,6 +15,8 @@ const AddTag = ({open, setOpen, x, y}) => {
     addTagData(x, y, color, colorLabel, data);
     setOpen(false);
     reset();
+    setColor("rgb(66, 133, 244)");
+    setColorLabel("Blue");
   };
 
   return(
@@ -31,7 +33,7 @@ const AddTag = ({open, setOpen, x, y}) => {
               <Input required {...register("description")} />
               <Stack direction="row" spacing={2}>
                 <FormLabel>Pick a color for your tag:</FormLabel>
-                <Badge badgeContent="" sx={{"& .MuiBadge-badge":{backgroundColor:color}}}>
+                <Badge badgeContent="" sx={{".MuiBadge-badge":{backgroundColor:color}}}>
                   <Chip label={colorLabel} />  
                 </Badge>                         
               </Stack>

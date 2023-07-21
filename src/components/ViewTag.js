@@ -23,8 +23,8 @@ const ViewTag = ({open, setOpen, tagId}) => {
   const edit = (data) => {
     deleteTag(tagId);
     addTagData(tagData.x, tagData.y, color, colorLabel, data);
-    reset();
     setOpen(false);
+    reset();
   };
 
   return(
@@ -41,7 +41,7 @@ const ViewTag = ({open, setOpen, tagId}) => {
               <Input defaultValue={tagData.description} required {...register("description")} />
               <Stack direction="row" spacing={2}>
                 <FormLabel>Pick a color for your tag:</FormLabel>
-                <Badge badgeContent="" sx={{"& .MuiBadge-badge":{backgroundColor:color}}}>
+                <Badge badgeContent="" sx={{".MuiBadge-badge":{backgroundColor:color}}}>
                   <Chip label={colorLabel} />  
                 </Badge>                         
               </Stack>
