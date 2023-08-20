@@ -16,6 +16,10 @@ const Tags = ({display, setDisplay}) => {
 
   const [newY, setNewY] = useState();
 
+  const [width, setWidth] = useState();
+
+  const [height, setHeight] = useState();
+
 const visibility = (id) => {
   if (id === badgeId) {
     return("flex");
@@ -24,10 +28,12 @@ const visibility = (id) => {
   }
 };
 
-const getDim = (e) => {
+const getDim = () => {
   const element = document.getElementById("image");
+  setWidth(element.getBoundingClientRect().width);
+  setHeight(element.getBoundingClientRect().height);
   setNewX(element.getBoundingClientRect().x);
-  setNewY(element.getBoundingClientRect().y);     
+  setNewY(element.getBoundingClientRect().y);
 };
 
 useEffect(() => {
@@ -37,7 +43,7 @@ useEffect(() => {
   return(
     <Fragment>
     {tags.map((tag) => (
-      <Badge key={tag.id} onMouseEnter={() => {setDisplay("block"); setBadgeId(tag.id);}}  onMouseLeave={()=>setBadgeId(null)} sx={{".MuiBadge-badge":{backgroundColor:tag.color}, position:"absolute", left:tag.x+newX+"px", top:tag.y+newY+"px", display: display}} anchorOrigin={{vertical: 'top', horizontal: 'left'}}>
+      <Badge key={tag.id} onMouseEnter={() => {setDisplay("block"); setBadgeId(tag.id);}}  onMouseLeave={()=>setBadgeId(null)} sx={{".MuiBadge-badge":{backgroundColor:tag.color}, position:"absolute", left:(tag.x*width)+newX+"px", top:(tag.y*height)+newY+"px", display: display}} anchorOrigin={{vertical: 'top', horizontal: 'left'}}>
         <Chip onClick={() => {setOpen(true); setTagId(tag.id);}} variant="soft" color="neutral" endDecorator={<ChipDelete onDelete={() => {deleteTag(tag.id); setBadgeId(null);}} />} sx={{display: visibility(tag.id)}}>{tag.title}</Chip>
       </Badge>
     ))}

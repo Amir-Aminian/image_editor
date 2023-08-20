@@ -16,9 +16,11 @@ function App() {
   const addTag = (e) => {
     const element = document.getElementById("image");
     const x = element.getBoundingClientRect().x;
-    const y = element.getBoundingClientRect().y;   
-    setX(e.clientX-x);
-    setY(e.clientY-y);
+    const y = element.getBoundingClientRect().y;  
+    const width = element.getBoundingClientRect().width;
+    const height = element.getBoundingClientRect().height; 
+    setX((e.clientX-x)/width);
+    setY((e.clientY-y)/height);
     setOpen(true);    
   };
 
